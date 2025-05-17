@@ -49,7 +49,7 @@ P(V | R, Flw) = P(V | R)  → **V não depende de Flw nem Str**
 
 A probabilidade condicional de Li depende de: V, B e K. 
 
-![](trabalho2/imgs/img.jpeg)
+![](trabalho2/imgs/img1.jpeg)
 
 
 
