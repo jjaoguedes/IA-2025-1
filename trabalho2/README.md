@@ -167,7 +167,7 @@ Ou seja, **$Str$ e $Li$ são condicionalmente independentes dado $V$**. Logo:
 
 
 
-(e) Calcule $P (V \mid Str = snow\_covered)$
+(e) Calcule $P (V \mid Str = \mathrm{snow\_covered})$
 
 Sabemos que:
 
@@ -186,7 +186,7 @@ $$
 Calcular:
 
 $$
-P(V = t \mid Str = \text{snow\_covered})
+P(V = t \mid Str = \mathrm{snow\_covered})
 $$
 
 
@@ -194,7 +194,7 @@ $$
 **Expansão com a regra da soma total**
 
 $$
-P(V = t \mid Str = \text{snow\_covered}) = \sum_{r \in \{t, f\}} P(V = t \mid R = r) \cdot P(R = r \mid Str = \text{snow\_covered})
+P(V = t \mid Str = \mathrm{snow\_covered}) = \sum_{r \in \{t, f\}} P(V = t \mid R = r) \cdot P(R = r \mid Str = \mathrm{snow\_covered})
 $$
 
 Mas como \( R \) e \( Str \) são independentes:
@@ -206,7 +206,7 @@ $$
 Portanto:
 
 $$
-P(V = t \mid Str = \text{snow\_covered}) = \sum_{r \in \{t, f\}} P(V = t \mid R = r) \cdot P(R = r)
+P(V = t \mid Str = \mathrm{snow\_covered}) = \sum_{r \in \{t, f\}} P(V = t \mid R = r) \cdot P(R = r)
 $$
 
 
@@ -225,7 +225,7 @@ $$
 Aplicando:
 
 $$
-P(V = t \mid Str = \text{snow\_covered}) = (0.20 \cdot 0.15) + (0.95 \cdot 0.85)
+P(V = t \mid Str = \mathrm{snow\_covered}) = (0.20 \cdot 0.15) + (0.95 \cdot 0.85)
 $$
 
 $$
@@ -237,7 +237,7 @@ $$
 **Resposta final**
 
 $$
-P(V = t \mid Str = \text{snow\_covered}) = 0.8375
+P(V = t \mid Str = \mathrm{snow\_covered}) = 0.8375
 $$
 
 # 2° Questão Implemente em ProbLog o problema da questão anterior e moste a solução para 1°(e).
