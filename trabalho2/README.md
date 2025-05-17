@@ -49,7 +49,7 @@ P(V | R, Flw) = P(V | R)  → **V não depende de Flw nem Str**
 
 A probabilidade condicional de Li depende de: V, B e K. 
 
-![](trabalho2/imgs/img1.jpeg)
+![](trabalho2/imgs/img.jpeg)
 
 
 
@@ -239,4 +239,4 @@ $$
 # 2° Questão Implemente em ProbLog o problema da questão anterior e moste a solução para 1°(e).
 
 Disponível em: 
-[]()
+[](https://github.com/jjaoguedes/IA-2025-1/blob/main/trabalho2/bicycle_Light.pl)
