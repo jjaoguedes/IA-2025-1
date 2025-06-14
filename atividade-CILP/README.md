@@ -6,6 +6,8 @@ Alunos:
 
 **Karen Letícia Santana da Silva - 22051416**
 
+**Matheus Rocha Canto - 22250353**
+
 
 # Rede Neural CILP para Resolução de Regras Lógicas
 
