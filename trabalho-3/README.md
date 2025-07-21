@@ -107,6 +107,6 @@ Dado um tabuleiro aberto, o sistema analisa quais **heurísticas lógicas** são
 ## Organização / Estrutura do Projeto
 ## Referências
 - Article: Designing Logic Tensor Networks for Visual Sudoku puzzle classification
-- 
+- [LTNTorch (Logic Tensor Networks)](https://github.com/marcotcr/LTNtorch)
 
 
