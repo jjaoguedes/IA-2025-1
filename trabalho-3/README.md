@@ -105,6 +105,13 @@ Dado um tabuleiro aberto, o sistema analisa quais **heurísticas lógicas** são
 - LTNTorch
 
 ## Organização / Estrutura do Projeto
+- ltn: biblioteca utilizada;
+- questao-1: solução questão 1;
+- questao-2: solução questão 2;
+- questao-3: solução questão 3;
+- requirements.txt: bibliotecas para configuração;
+- config-ambiente.md: configuração do ambiente para executar o código (caso não esteja configurado).
+  
 ## Referências
 - Article: Designing Logic Tensor Networks for Visual Sudoku puzzle classification
 - [LTNtorch no GitHub](https://github.com/tommasocarraro/LTNtorch)
