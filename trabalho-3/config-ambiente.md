@@ -96,7 +96,6 @@ pip3 install -r requirements.txt
 
 - `ltn/core.py`: este módulo contém a implementação do framework LTN. Em particular, contém a definição de constantes, variáveis, predicados, funções, conectivos e quantificadores.
 - `ltn/fuzzy_ops.py`: este módulo contém a implementação de semântica de lógica fuzzy comum usando primitivas PyTorch.
-- `tutorials/`: esta pasta contém alguns tutoriais importantes para começar a codificar em LTN.
 
 ## Mais Informações
 
