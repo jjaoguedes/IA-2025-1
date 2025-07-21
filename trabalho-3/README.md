@@ -104,7 +104,7 @@ Dado um tabuleiro aberto, o sistema analisa quais **heurísticas lógicas** são
 - PyTorch
 - LTNTorch
 
-## Organização
+## Organização / Estrutura do Projeto
 
 
 
