@@ -14,7 +14,7 @@
 
 - [Python 3](https://www.python.org/)
 - [PyTorch](https://pytorch.org/)
-- [LTNTorch (Logic Tensor Networks)](https://github.com/marcotcr/LTNtorch)
+- [LTNtorch no GitHub](https://github.com/tommasocarraro/LTNtorch)
 
 ## Estrutura esperada do arquivo CSV
 
