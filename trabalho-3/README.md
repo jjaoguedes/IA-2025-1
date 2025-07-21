@@ -111,6 +111,7 @@ Dado um tabuleiro aberto, o sistema analisa quais **heurísticas lógicas** são
 - **questao-3:** solução questão 3;
 - **requirements.txt:** bibliotecas para configuração;
 - **config-ambiente.md:** configuração do ambiente para executar o código (caso não esteja configurado).
+
   OBS: Não esqueça de acessar o README específicos para cada questão.
   
 ## Referências
