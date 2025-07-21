@@ -49,6 +49,8 @@ OBS: Para mais informações, acesse o repositório oficial: [LTNtorch no GitHub
 ```bash
 pip3 install LTNtorch
 ```
+OBS: Se atentar a utilização do arquivo:
+requirements.txt
 
 ### 4. **Coloque o seu CSV de Sudoku na pasta sudoku_data/.**
 ### 5. **Execute o script:**
