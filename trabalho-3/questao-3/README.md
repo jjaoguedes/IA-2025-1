@@ -1,5 +1,3 @@
-Para resolver a **Questão 3**, precisamos adotar uma abordagem que se baseia em heurísticas para resolver o Sudoku de um tabuleiro aberto. O objetivo é identificar quais heurísticas são mais adequadas para diferentes cenários e como elas podem ser aplicadas para aprimorar a resolução do Sudoku.
-
 ### Resposta:
 
 A questão pede para:
