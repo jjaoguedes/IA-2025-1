@@ -131,7 +131,3 @@ clean:
 
 ---
 
-## Contribuições
-
-Sugestões, melhorias e correções são bem-vindas! Crie um pull request ou envie uma issue.
-
