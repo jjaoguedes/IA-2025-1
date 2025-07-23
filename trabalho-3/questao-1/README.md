@@ -32,29 +32,23 @@ O Sudoku deve estar salvo como um arquivo `.csv` com números de 1 a N (onde N =
 ### 1. **Clone o repositório**:
 ```bash
 git clone https://github.com/jjaoguedes/IA-2025-1.git
-cd trabalho-3\questao-1
+cd IA-2025-1/trabalho-3/questao-1
 ```
 
-### 2. **Se atente a estrutura:**
-
-**Estrutura do Repositório**
-
-- `ltn/core.py`: este módulo contém a implementação do framework LTN. Em particular, contém a definição de constantes, variáveis, predicados, funções, conectivos e quantificadores.
-- `ltn/fuzzy_ops.py`: este módulo contém a implementação de semântica de lógica fuzzy comum usando primitivas PyTorch.
-- `tutorials/`: esta pasta contém alguns tutoriais importantes para começar a codificar em LTN.
-
-OBS: Para mais informações, acesse o repositório oficial: [LTNtorch no GitHub](https://github.com/tommasocarraro/LTNtorch)
-
-### 3. **Instale as dependências:**
+### 2. **Instale as dependências:**
 ```bash
 pip3 install LTNtorch
 ```
 OBS: Se atentar aos requirimentos presentes no arquivo **requirements.txt**
 
-### 4. **Coloque o seu CSV de Sudoku na pasta sudoku_data/.**
-### 5. **Execute o script:**
 ```bash
-python3 sudoku_ltn.py
+pip install -r requirements.txt
+```
+
+### 3. **Adicione o seu arquivo CSV com o Sudoku na pasta sudoku_data/**
+### 4. **Execute o script:**
+```bash
+python3 sudoku_ltn.py sudoku_data/sudoku4x4.csv 4
 ```
 
 ## Saídas Esperadas:
@@ -72,8 +66,16 @@ Inválido
 ```
 ## Organização do Código
 
+A lógica do Sudoku é implementada com base em predicados e fórmulas fuzzy. Abaixo, os principais componentes:
+
 - **read_csv_board** – lê o arquivo .csv e transforma em matriz
 - **board_to_tensor** – converte o tabuleiro para representação tensora
 - **HasValueNet** – predicado para verificar valores nas células
 - **ExactlyOne, OneHot, UniqueInRow, UniqueInColumn, UniqueInBlock** – fórmulas de restrição do Sudoku
 - **aggregate** – mede o nível de satisfação das regras
+
+**Estrutura do Repositório**
+
+- `ltn/core.py`: este módulo contém a implementação do framework LTN. Em particular, contém a definição de constantes, variáveis, predicados, funções, conectivos e quantificadores.
+- `ltn/fuzzy_ops.py`: este módulo contém a implementação de semântica de lógica fuzzy comum usando primitivas PyTorch.
+- `tutorials/`: esta pasta contém alguns tutoriais importantes para começar a codificar em LTN.
