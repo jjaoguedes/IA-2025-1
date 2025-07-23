@@ -7,7 +7,8 @@ Este projeto propõe uma solução lógica e simbólica para o problema do Sudok
 - Aline da Conceição Ferreira Lima - 22250366
 - Allan Carvalho de Aguiar - 22153696
 - Karen Letícia Santana da Silva - 22051416
-- João Victor Felix Guedes - 22050227 
+- João Victor Felix Guedes - 22050227
+- Tedy Prist de Souza Pereira - 22050676
 
 ## Descrição Geral
 
