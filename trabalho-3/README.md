@@ -3,10 +3,11 @@
 Este projeto propõe uma solução lógica e simbólica para o problema do Sudoku utilizando **LTNTorch** (Logic Tensor Networks). A implementação aborda desde a verificação de um tabuleiro fechado até a recomendação de heurísticas para tabuleiros abertos, utilizando axiomas formulados com base em restrições do jogo e exemplos do repositório oficial do LTNTorch.
 
 Alunos: 
-Aline da Conceição Ferreira Lima - 22250366
-Allan Carvalho de Aguiar - 22153696
-Karen Letícia Santana da Silva - 22051416
-João Victor Felix Guedes - 22050227 
+
+- Aline da Conceição Ferreira Lima - 22250366
+- Allan Carvalho de Aguiar - 22153696
+- Karen Letícia Santana da Silva - 22051416
+- João Victor Felix Guedes - 22050227 
 
 ## Descrição Geral
 
