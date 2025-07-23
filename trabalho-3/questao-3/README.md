@@ -1,91 +1,94 @@
-## Questão 3.1: Indicar para um tabuleiro aberto qual das heurísticas são mais recomendadas.
+Para resolver a **Questão 3**, precisamos adotar uma abordagem que se baseia em heurísticas para resolver o Sudoku de um tabuleiro aberto. O objetivo é identificar quais heurísticas são mais adequadas para diferentes cenários e como elas podem ser aplicadas para aprimorar a resolução do Sudoku.
 
-O LTN é perfeito para isso. A "recomendação" de uma heurística pode ser quantificada pelo nível de satisfação (truth value) da premissa da heurística.
+### Resposta:
 
-Como fazer isso com LTN:
+A questão pede para:
 
-Axiomatizar a Premissa da Heurística:
-Vamos focar na H1 (Hidden Single) para uma linha como exemplo.
-A premissa é: "O dígito d tem apenas um lugar possível na linha r".
-Podemos definir um novo predicado aprendido: is_hidden_single_in_row(d, r).
+1. **Gerar cláusulas** com heurísticas e inseri-las no problema.
+2. **Rodar um SAT-solver** ou outro solucionador de Sudoku, levando em consideração restrições lógicas e heurísticas.
+3. **Avaliar se seria possível resolver o Sudoku com LTN** (Logic Tensor Networks).
 
-Treinamento do Predicado Heurístico:
-Criaríamos um conjunto de dados de tabuleiros de Sudoku parcialmente preenchidos. Para cada tabuleiro, identificaríamos instâncias onde a heurística "Hidden Single" se aplica. Esses seriam os exemplos positivos para treinar o predicado is_hidden_single_in_row.
+### Solução:
 
-Avaliação (Recomendação):
-Dado um novo tabuleiro, para cada dígito d e cada linha r, calculamos o valor de verdade de is_hidden_single_in_row(d, r).
+#### 1. **Gerar cláusulas para heurísticas e inseri-las no problema**
 
-Se is_hidden_single_in_row(d_5, r_3) resultar em um valor alto (ex: 0.98), o sistema está "recomendando" fortemente a aplicação desta heurística para o dígito 5 na linha 3.
+A primeira parte da questão nos pede para gerar cláusulas para heurísticas. As heurísticas podem ser vistas como restrições adicionais que limitam as possibilidades de movimentação de valores nas células do Sudoku. Algumas das heurísticas comuns para o Sudoku incluem:
 
-Se todas as instâncias dessa heurística tiverem valores baixos, significa que ela não é aplicável ou útil no estado atual do tabuleiro.
+* **Menor número de opções**: Preencher células que têm o menor número de opções válidas.
+* **Menor número de candidatos possíveis**: Priorizar valores que têm menos opções válidas em outras células (isso pode ser útil no caso de uma escolha forçada).
+* **Contar ocorrências**: Priorizar a colocação de números que já aparecem com menos frequência.
 
-Comparando Heurísticas:
-Para comparar a H1 com a H2, faríamos o mesmo para a H2, definindo um predicado como is_naked_pair_in_block(c1, c2, d1, d2, b). Depois, para um dado tabuleiro, avaliaríamos todos os predicados heurísticos.
+**Cláusulas possíveis para as heurísticas**:
 
-A heurística "mais recomendada" é aquela cuja premissa tem o maior valor de verdade (mais próxima de 1.0) para uma instância específica no tabuleiro atual.
+* Para a **heurística de menor número de opções**:
 
-## Questão 3.2: Gere cláusulas para elas e rode um SAT-solver.
+  ```python
+  def min_options_heuristic(board, N):
+      possible_placements = self.find_possible_placements(board)
+      for digit, positions in possible_placements.items():
+          if len(positions) == 1:
+              # Adiciona a restrição para colocar esse dígito na posição única
+              r, c = positions[0]
+              clauses.append(f"Colocar {digit} em ({r}, {c})")
+  ```
 
-Este é o passo híbrido que conecta o LTN ao solver tradicional.
+* Para a **heurística de menor número de candidatos possíveis**:
 
-Análise com LTN:
+  ```python
+  def min_candidates_heuristic(board, N):
+      possible_placements = self.find_possible_placements(board)
+      sorted_candidates = sorted(possible_placements.items(), key=lambda item: len(item[1]))
+      for digit, positions in sorted_candidates:
+          if positions:
+              r, c = positions[0]
+              clauses.append(f"Colocar {digit} em ({r}, {c})")
+  ```
 
-Pegue um tabuleiro de Sudoku incompleto.
+* Para **contagem de ocorrências** de cada dígito nas linhas, colunas e blocos:
 
-Use o sistema LTN treinado (com os predicados para as regras básicas e as heurísticas) para analisar o tabuleiro.
+  ```python
+  def count_occurrences_heuristic(board, N):
+      occurrences = defaultdict(int)
+      for row in board:
+          for num in row:
+              if num != 0:
+                  occurrences[num] += 1
+      return occurrences
+  ```
 
-O LTN identifica que, por exemplo, a premissa de Hidden Single é muito verdadeira para o dígito 7 na célula (2,5). O valor de verdade de is_hidden_single(d_7, c_{2,5}) é, digamos, 0.99.
+Essas cláusulas podem ser inseridas diretamente nas etapas de verificação das regras, aplicando as heurísticas para determinar qual célula preencher com qual valor.
 
-Geração de Cláusulas:
+#### 2. **Rodar um SAT-solver ou outro solucionador**
 
-Com base na alta confiança do LTN, você gera uma nova cláusula lógica. O formato da cláusula depende do solver, mas em sua forma fundamental, a cláusula é: is_digit(c_{2,5}, d_7).
+O Sudoku pode ser formulado como um problema SAT (Satisfiability Problem) onde as células precisam obedecer a um conjunto de restrições lógicas. O SAT-solver pode ser usado para verificar a satisfiabilidade dessas cláusulas.
 
-Se você estiver usando um formato como CNF (Conjunctive Normal Form) para um SAT-solver, a representação seria algo como x_{2,5,7}, significando que a variável booleana "célula (2,5) é 7" deve ser verdadeira.
+Um exemplo simples de como a formulação SAT pode ser feita é:
 
-Rodar o Solver:
+```python
+from pyswip import Prolog
 
-Base: Converta as regras básicas do Sudoku para o formato do seu solver (ex: CNF para um SAT-solver).
+def run_sat_solver(board, N):
+    prolog = Prolog()
 
-Adição Heurística: Adicione a nova cláusula x_{2,5,7} gerada pelo LTN ao conjunto de cláusulas base.
+    # Definir cláusulas do Sudoku
+    for i in range(N):
+        for j in range(N):
+            if board[i][j] != 0:
+                prolog.assertz(f"cell({i}, {j}, {board[i][j]})")
 
-Execução: Rode o SAT-solver (como MiniSat, Z3, etc.) no conjunto de cláusulas aumentado.
+    # Definir as restrições para o Sudoku
+    for i in range(N):
+        for j in range(N):
+            for k in range(i+1, N):
+                prolog.assertz(f"cell({i}, {j}, X), cell({i}, {k}, X) -> fail")  # Linha
+                prolog.assertz(f"cell({i}, {j}, X), cell({k}, {j}, X) -> fail")  # Coluna
 
-Comparação do Uso:
-Para comparar os conjuntos de heurísticas, você pode medir o desempenho do solver:
+    result = list(prolog.query("cell(X, Y, Z)"))
+    return result
+```
 
-Cenário A: Rodar o solver apenas com as regras básicas do Sudoku. Medir o tempo de resolução.
+Este código tenta formular o Sudoku como uma série de cláusulas e usa um SAT-solver para verificar se a solução é válida. O `pyswip` é uma interface Python para o SWI-Prolog, que é usado como solucionador de SAT.
 
-Cenário B: Usar o LTN para gerar cláusulas da heurística H1. Adicioná-las ao problema e medir o tempo.
+#### 3. **Resolver o Sudoku com LTN (Logic Tensor Networks)**
 
-Cenário C: Usar o LTN para gerar cláusulas da heurística H2. Adicioná-las e medir o tempo.
-
-Cenário D: Usar o LTN para gerar cláusulas de H1 e H2. Adicioná-las e medir o tempo.
-
-A conclusão virá da comparação dos tempos de resolução. Se o Cenário B for significativamente mais rápido que o A, a heurística H1 foi útil. Se o Cenário D for o mais rápido, a combinação de ambas foi a melhor estratégia para aquele tabuleiro.
-
-## Questão 3.3: Seria possível resolver o Sudoku com LTN?
-
-Esta é uma questão fundamental sobre a natureza do LTN. A resposta é não diretamente, mas sim indiretamente.
-
-Por que não diretamente?
-O LTN é um framework de aprendizagem e inferência fuzzy, não um solver de restrições discretas. O processo de treinamento do LTN ajusta os pesos da rede para maximizar a satisfação dos axiomas lógicos. O resultado final é um predicado is_digit que atribui um valor de probabilidade (entre 0 e 1) a cada par (célula, dígito).
-Se você simplesmente pegar o dígito com a maior probabilidade para cada célula, não há garantia de que o resultado final será um tabuleiro de Sudoku válido. Pode haver conflitos sutis, pois os axiomas podem ser satisfeitos em, digamos, 99.9%, mas não 100%. Falta a "crocância" (crispness) de uma solução lógica garantida.
-
-Como resolver indiretamente (a abordagem híbrida)?
-A maneira mais poderosa e correta de "resolver" o Sudoku com LTN é a descrita na seção anterior:
-
-Aprender as Regras: Use o LTN para aprender um modelo robusto das restrições e das heurísticas do Sudoku.
-
-Guiar a Busca: Use o modelo LTN treinado para analisar um tabuleiro e fazer "suposições inteligentes" (gerar cláusulas heurísticas) que restringem drasticamente o espaço de busca.
-
-Resolver com a Ferramenta Certa: Passe essas suposições, juntamente com as regras básicas, para um solver de restrições (SAT, SMT, Constraint Programming) que é projetado para encontrar soluções discretas e garantidas.
-
-## Conclusão
-
-Projetar uma solução de Sudoku com LTNtorch é um excelente exercício em computação neuro-simbólica.
-
-O LTN não substitui um SAT-solver para a tarefa de encontrar a solução final.
-
-O poder do LTN está em sua capacidade de aprender com dados e lógica, de lidar com incerteza e de quantificar a aplicabilidade de regras e heurísticas complexas em um determinado contexto.
-
-A arquitetura mais eficaz é um sistema híbrido, onde o LTN atua como um "oráculo" ou "guia" que fornece insights para um solver lógico tradicional, combinando o melhor do aprendizado de máquina com a rigorosidade da lógica formal.
+Sim, é possível resolver o Sudoku com **LTN**. O modelo LTN é baseado em redes neurais e lógica difusa (fuzzy logic), o que significa que ele pode ser configurado para lidar com restrições lógicas e condições de satisfiabilidade. Ao usar **predicados** como `HasValue` (já implementado no código fornecido), podemos usar as **restrições lógicas** para garantir que a solução seja válida. A vantagem do uso do LTN é que ele permite incorporar **fuzzy logic**, onde as soluções não precisam ser simplesmente "válidas" ou "inválidas", mas podem ser avaliadas em um espectro de satisfação.
