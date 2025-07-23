@@ -24,7 +24,7 @@ Para comparar a H1 com a H2, faríamos o mesmo para a H2, definindo um predicado
 
 A heurística "mais recomendada" é aquela cuja premissa tem o maior valor de verdade (mais próxima de 1.0) para uma instância específica no tabuleiro atual.
 
-Questão 3.2: Gere cláusulas para elas e rode um SAT-solver.
+## Questão 3.2: Gere cláusulas para elas e rode um SAT-solver.
 
 Este é o passo híbrido que conecta o LTN ao solver tradicional.
 
@@ -63,7 +63,7 @@ Cenário D: Usar o LTN para gerar cláusulas de H1 e H2. Adicioná-las e medir o
 
 A conclusão virá da comparação dos tempos de resolução. Se o Cenário B for significativamente mais rápido que o A, a heurística H1 foi útil. Se o Cenário D for o mais rápido, a combinação de ambas foi a melhor estratégia para aquele tabuleiro.
 
-Questão 3.3: Seria possível resolver o Sudoku com LTN?
+## Questão 3.3: Seria possível resolver o Sudoku com LTN?
 
 Esta é uma questão fundamental sobre a natureza do LTN. A resposta é não diretamente, mas sim indiretamente.
 
@@ -80,7 +80,7 @@ Guiar a Busca: Use o modelo LTN treinado para analisar um tabuleiro e fazer "sup
 
 Resolver com a Ferramenta Certa: Passe essas suposições, juntamente com as regras básicas, para um solver de restrições (SAT, SMT, Constraint Programming) que é projetado para encontrar soluções discretas e garantidas.
 
-Conclusão
+## Conclusão
 
 Projetar uma solução de Sudoku com LTNtorch é um excelente exercício em computação neuro-simbólica.
 
